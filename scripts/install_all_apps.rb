@@ -1,8 +1,11 @@
-require_relative '../install/keepassxc_installer.rb'
+require_relative '../install/keepassxc_installer'
+require_relative '../utils/logging'
+
+include Logging
 
 if Process.uid != 0
-    puts '[ERROR]> Must be running this script as root.'
-    exit
+  logger.error 'Must be running this script as root.'
+  exit
 end
 
 # TODO Packages to install and configure in my distro:
