@@ -25,7 +25,7 @@ class KeePassXCInstaller < BaseInstaller
 
   def install
     logger.info "Installing #{@app_name} with APT."
-    sucess = run_apt_install(@@package_name)
+    sucess = run_pacman_install(@@package_name)
     if sucess
       logger.info "Installed #{@app_name} sucessfuly."
     else

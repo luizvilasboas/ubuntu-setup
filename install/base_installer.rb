@@ -33,10 +33,17 @@ class BaseInstaller
   def post_install
   end
 
-  def run_apt_install(package)
-    # TODO Study if there is a shorter output for APT (like a -q flag or something)
-    command = "sudo apt install -y #{package}"
-    logger.info "Executing: sudo apt install -y #{package}"
+  def run_pacman_install(package)
+    command = "sudo pacman -S --noconfirm #{package}"
+    logger.info command
+    sucess = system(command)
+    raise "Failed when ran '#{command}'." unless sucess
+    sucess
+  end
+
+  def run_yay_install(package)
+    command = "yay -S --noconfirm #{package}"
+    logger.info command
     sucess = system(command)
     raise "Failed when ran '#{command}'." unless sucess
     sucess
