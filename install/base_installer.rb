@@ -48,4 +48,12 @@ class BaseInstaller
     raise "Failed when ran '#{command}'." unless sucess
     sucess
   end
+
+  def run_flatpak_install(package)
+    command = "flatpak install -y --noninteractive #{package}"
+    logger.info command
+    sucess = system(command)
+    raise "Failed when ran '#{command}'." unless sucess
+    sucess
+  end
 end
