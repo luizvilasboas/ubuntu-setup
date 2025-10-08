@@ -1,23 +1,23 @@
+# frozen_string_literal: true
+
 require_relative 'base_installer'
 require_relative '../utils/logging'
 
+# Installer for Docker.
 class DockerInstaller < BaseInstaller
-  @@package_name = 'docker docker-compose lazydocker'
-
-  include Logging
-
-  def initialize()
+  def initialize
     super('Docker')
+    @package_name = 'docker docker-compose lazydocker'
   end
 
   def install
     logger.info "Installing #{@app_name} with pacman."
-    run_pacman_install(@@package_name)
+    run_pacman_install(@package_name)
     logger.info "Installed #{@app_name} sucessfuly."
   end
 
   def post_install
-    user = ENV['SUDO_USER']
+    user = ENV.fetch('SUDO_USER', nil)
     logger.info "Adding user #{user} to the docker group."
     command = "usermod -aG docker #{user}"
     sucess = system(command)

@@ -1,18 +1,18 @@
+# frozen_string_literal: true
+
 require_relative 'base_installer'
 require_relative '../utils/logging'
 
+# Installer for Chromium.
 class ChromiumInstaller < BaseInstaller
-  @@package_name = 'chromium'
-
-  include Logging
-
-  def initialize()
+  def initialize
     super('Chromium')
+    @package_name = 'chromium'
   end
 
   def install
     logger.info "Installing #{@app_name} with pacman."
-    run_pacman_install(@@package_name)
+    run_pacman_install(@package_name)
     logger.info "Installed #{@app_name} sucessfuly."
   end
 end

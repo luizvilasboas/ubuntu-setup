@@ -1,31 +1,31 @@
+# frozen_string_literal: true
+
 require_relative 'base_installer'
 require_relative '../utils/logging'
 
+# Installer for KeePassXC.
 class KeePassXCInstaller < BaseInstaller
-  @@path_to_keepassxc_database = '~/.local/share/keepassxc'
-  @@package_name = 'keepassxc'
-
-  include Logging
-
-  def initialize()
+  def initialize
     super('KeePassXC')
+    @package_name = 'keepassxc'
+    @path_to_keepassxc_database = '~/.local/share/keepassxc'
   end
 
   def pre_install
-    logger.info "Creating an folder to put the #{@app_name} database file (default #{@@path_to_keepassxc_database})."
-    command = "mkdir -p #{@@path_to_keepassxc_database}"
+    logger.info "Creating an folder to put the #{@app_name} database file (default #{@path_to_keepassxc_database})."
+    command = "mkdir -p #{@path_to_keepassxc_database}"
     sucess = system(command)
 
     if sucess
-      logger.info "Created #{@app_name} database folder in #{@@path_to_keepassxc_database}."
+      logger.info "Created #{@app_name} database folder in #{@path_to_keepassxc_database}."
     else
-      logger.error "Couldn't create folder at #{@@path_to_keepassxc_database}."
+      logger.error "Couldn't create folder at #{@path_to_keepassxc_database}."
     end
   end
 
   def install
     logger.info "Installing #{@app_name} with APT."
-    sucess = run_pacman_install(@@package_name)
+    sucess = run_pacman_install(@package_name)
     if sucess
       logger.info "Installed #{@app_name} sucessfuly."
     else

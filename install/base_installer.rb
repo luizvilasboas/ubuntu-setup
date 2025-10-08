@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative '../utils/logging'
 
+# Base class for all installers.
 class BaseInstaller
   attr_reader :app_name
 
@@ -16,28 +19,28 @@ class BaseInstaller
     install
     post_install
     logger.info "#{@app_name} installed sucessfuly."
-  rescue NotImplementedError => e
+  rescue NotImplementedError
     logger.error 'Must implement all methods.'
-  rescue => e
+  rescue StandardError => e
     logger.error "An undefined error happend. Message: #{e}"
   end
 
   protected
-  def pre_install
-  end
+
+  def pre_install; end
 
   def install
     raise NotImplementedError, "#{self.class} did not implemented the 'install' method"
   end
 
-  def post_install
-  end
+  def post_install; end
 
   def run_pacman_install(package)
     command = "sudo pacman -S --noconfirm #{package}"
     logger.info command
     sucess = system(command)
     raise "Failed when ran '#{command}'." unless sucess
+
     sucess
   end
 
@@ -46,6 +49,7 @@ class BaseInstaller
     logger.info command
     sucess = system(command)
     raise "Failed when ran '#{command}'." unless sucess
+
     sucess
   end
 
@@ -54,6 +58,7 @@ class BaseInstaller
     logger.info command
     sucess = system(command)
     raise "Failed when ran '#{command}'." unless sucess
+
     sucess
   end
 end
