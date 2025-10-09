@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require_relative '../lib/installer'
+require_relative '../lib/remover'
+require_relative '../lib/utils'
+
+# Main class for the script
+class Main
+  include Logging
+
+  def install_apps
+    logger.info 'Installing applications...'
+    read_list('config/install/native.list').each { |app| install_app(app, :pacman) }
+    read_list('config/install/aur.list').each { |app| install_app(app, :yay) }
+    read_list('config/install/flatpak.list').each { |app| install_app(app, :flatpak) }
+  end
+
+  def remove_apps
+    logger.info 'Removing applications...'
+    read_list('config/remove/native.list').each { |app| remove_app(app, :pacman) }
+    read_list('config/remove/aur.list').each { |app| remove_app(app, :yay) }
+  end
+
+  def install_app(app_name, manager)
+    Installer.new(app_name, app_name, manager).install
+  end
+
+  def remove_app(app_name, manager)
+    Remover.new(app_name, app_name, manager).remove
+  end
+
+  def read_list(file_path)
+    File.exist?(file_path) ? File.readlines(file_path).map(&:chomp).reject(&:empty?) : []
+  end
+end
+
+main = Main.new
+
+main.install_apps
+main.remove_apps
