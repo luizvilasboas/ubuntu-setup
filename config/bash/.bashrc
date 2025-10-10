@@ -11,6 +11,6 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
   ssh-add ~/.ssh/desktop &> /dev/null
 fi
 
-if [ ! -z "$HOME/.local/share/keepassxc" ]; then
+if [ ! -d "$HOME/.local/share/keepassxc" ]; then
   mkdir ~/.local/share/keepassxc
 fi
