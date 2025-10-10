@@ -2,37 +2,61 @@
 
 # frozen_string_literal: true
 
-require_relative '../lib/installer'
-require_relative '../lib/remover'
+require_relative '../lib/app_installer'
+require_relative '../lib/app_remover'
+require_relative '../lib/config_installer'
 require_relative '../lib/utils'
 
 # Main class for the script
 class Main
   include Logging
 
+  def initialize(base_config_list_path = 'config/apps', base_config_path = 'config')
+    @base_config_list_path = File.expand_path base_config_list_path
+    @base_config_path = File.expand_path base_config_path
+  end
+
+  def install_config
+    logger.info 'Installing configs...'
+
+    configs = {
+      "#{@base_config_path}/starship/starship.toml" => "#{Dir.home}/.config/starship.toml"
+    }
+
+    configs.each do |from, to|
+      config_installer = ConfigInstaller.new(from, to)
+      config_installer.add_symlink
+    end
+  end
+
   def install_apps
     logger.info 'Installing applications...'
-    read_list('config/install/native.list').each { |app| install_app(app, :pacman) }
-    read_list('config/install/aur.list').each { |app| install_app(app, :yay) }
-    read_list('config/install/flatpak.list').each { |app| install_app(app, :flatpak) }
+    logger.info @base_config_list_path
+    read_list("#{@base_config_list_path}/install/native.list").each { |app| install_app(app, :pacman) }
+    read_list("#{@base_config_list_path}/install/aur.list").each { |app| install_app(app, :yay) }
+    read_list("#{@base_config_list_path}/install/flatpak.list").each { |app| install_app(app, :flatpak) }
   end
 
   def remove_apps
     logger.info 'Removing applications...'
-    read_list('config/remove/native.list').each { |app| remove_app(app, :pacman) }
-    read_list('config/remove/aur.list').each { |app| remove_app(app, :yay) }
+    read_list("#{@base_config_list_path}/remove/native.list").each { |app| remove_app(app, :pacman) }
+    read_list("#{@base_config_list_path}/remove/aur.list").each { |app| remove_app(app, :yay) }
   end
 
   def install_app(app_name, manager)
-    Installer.new(app_name, app_name, manager).install
+    AppInstaller.new(app_name, app_name, manager).install
   end
 
   def remove_app(app_name, manager)
-    Remover.new(app_name, app_name, manager).remove
+    AppRemover.new(app_name, app_name, manager).remove
   end
 
   def read_list(file_path)
     File.exist?(file_path) ? File.readlines(file_path).map(&:chomp).reject(&:empty?) : []
+  end
+
+  def read_folder(folder_path)
+    File.exist?(folder_path) and File.directory?(folder_path) ? Dir.children(folder_path) : nil
   end
 end
 
@@ -40,3 +64,4 @@ main = Main.new
 
 main.install_apps
 main.remove_apps
+main.install_config

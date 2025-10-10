@@ -1,0 +1,46 @@
+add_newline = false
+command_timeout = 200
+format = "[\\[$username@$hostname $directory\\] $git_branch$git_status]($style)$character"
+
+[username]
+style_root = "red"
+style_user = "yellow"
+show_always = true
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+disabled = false
+style = "green"
+
+[character]
+error_symbol = "[#](white)"
+success_symbol = "[\\$](white)"
+
+[directory]
+truncation_length = 2
+truncation_symbol = "…/"
+style = "cyan"
+repo_root_style = "cyan"
+format = "[$path]($style)[$read_only]($read_only_style)"
+repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)"
+
+[git_branch]
+format = "[$branch]($style) "
+style = "purple"
+
+[git_status]
+format = '[$all_status]($style)'
+style = "red"
+ahead = "⇡${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+behind = "⇣${count} "
+conflicted = " "
+up_to_date = " "
+untracked = "? "
+modified = " "
+stashed = ""
+staged = ""
+renamed = ""
+deleted = ""

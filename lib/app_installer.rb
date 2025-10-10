@@ -1,16 +1,11 @@
 # frozen_string_literal: true
 
 require_relative 'utils'
+require_relative 'app'
 
 # Generic class for installer.
-class Installer
+class AppInstaller < App
   include Logging
-
-  def initialize(app_name, package_name, manager)
-    @app_name = app_name
-    @package_name = package_name
-    @manager = manager
-  end
 
   # rubocop:disable Metrics/MethodLength
   def install
