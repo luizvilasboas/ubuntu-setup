@@ -24,7 +24,13 @@ class Main
   def install_config
     logger.info 'Installing configs...'
     @configs_json[:configs].each do |config|
-      ConfigInstaller.new(config[:from], config[:to]).add_symlink
+      to = config[:to]
+      match_data = to.match(/^~\//)
+      to = "#{Dir.home}/#{match_data.post_match}" if match_data
+
+      from = File.expand_path(config[:from])
+
+      ConfigInstaller.new(from, to).add_symlink
     end
   end
 

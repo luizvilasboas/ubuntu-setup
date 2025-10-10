@@ -2,12 +2,12 @@
   "configs": [
     {
       "name": "Bash",
-      "from": "config/bash/.bashrc",
+      "from": "./config/bash/.bashrc",
       "to": "~/.bashrc"
     },
     {
       "name": "Starship",
-      "from": "config/starship/starship.toml",
+      "from": "./config/starship/starship.toml",
       "to": "~/.config/starship.toml"
     }
   ]
