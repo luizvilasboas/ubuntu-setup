@@ -2,9 +2,11 @@
 
 # Abstract class for any app managing class
 class App
-  def initialize(app_name, package_name, manager)
+  def initialize(app_name, package_name, package_manager)
     @app_name = app_name
     @package_name = package_name
-    @manager = manager
+    @package_manager = package_manager
   end
+
+  def exec; end
 end

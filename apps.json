@@ -1,0 +1,86 @@
+{
+  "apps_to_install": [
+    {
+      "name": "KeePassXC",
+      "package_name": "keepassxc",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "Discord",
+      "package_name": "discord",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "Gnome Disk Utility",
+      "package_name": "gnome-disk-utility",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "GParted",
+      "package_name": "gparted",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "Cheese",
+      "package_name": "cheese",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "Steam",
+      "package_name": "steam",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "Lutris",
+      "package_name": "lutris",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "ProtonPlus",
+      "package_name": "protonplus",
+      "package_manager": "yay"
+    }
+  ],
+  "apps_to_remove": [
+    {
+      "name": "1Password",
+      "package_name": "1password",
+      "package_manager": "yay"
+    },
+    {
+      "name": "Typora",
+      "package_name": "typora",
+      "package_manager": "yay"
+    },
+    {
+      "name": "Dropbox",
+      "package_name": "dropbox",
+      "package_manager": "yay"
+    },
+    {
+      "name": "Obsidian",
+      "package_name": "obsidian",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "Signal Desktop",
+      "package_name": "signal-desktop",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "OBS Studio",
+      "package_name": "obs-studio",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "Kdenlive",
+      "package_name": "kdenlive",
+      "package_manager": "pacman"
+    },
+    {
+      "name": "Tailscale",
+      "package_name": "tailscale",
+      "package_manager": "pacman"
+    }
+  ]
+}

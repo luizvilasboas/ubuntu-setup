@@ -8,17 +8,17 @@ class AppInstaller < App
   include Logging
 
   # rubocop:disable Metrics/MethodLength
-  def install
-    logger.info "Installing #{@app_name} with #{@manager}."
-    case @manager
-    when :pacman
+  def exec
+    logger.info "Installing #{@app_name} with #{@package_manager}."
+    case @package_manager
+    when 'pacman'
       run_pacman_install(@package_name)
-    when :yay
+    when 'yay'
       run_yay_install(@package_name)
-    when :flatpak
+    when 'flatpak'
       run_flatpak_install(@package_name)
     else
-      logger.error "Unsupported package manager: #{@manager}"
+      logger.error "Unsupported package manager: #{@package_manager}"
     end
   end
   # rubocop:enable Metrics/MethodLength
@@ -28,8 +28,7 @@ class AppInstaller < App
   def run_pacman_install(package)
     command = "sudo pacman -S --noconfirm #{package}"
     logger.info command
-    # sucess = system(command)
-    sucess = true
+    sucess = system(command)
     raise "Failed when ran '#{command}'." unless sucess
 
     sucess
@@ -38,8 +37,7 @@ class AppInstaller < App
   def run_yay_install(package)
     command = "yay -S --noconfirm #{package}"
     logger.info command
-    # sucess = system(command)
-    sucess = true
+    sucess = system(command)
     raise "Failed when ran '#{command}'." unless sucess
 
     sucess
@@ -48,7 +46,7 @@ class AppInstaller < App
   def run_flatpak_install(package)
     command = "flatpak install -y --noninteractive #{package}"
     logger.info command
-    # sucess = system(command)
+    sucess = system(command)
     raise "Failed when ran '#{command}'." unless sucess
 
     sucess

@@ -14,7 +14,7 @@ class ConfigInstaller
   end
 
   def add_symlink
-    raise "config file '#{@from}' does not exists" unless File.exist?(@from)
+    raise IOError, "config file '#{@from}' does not exists" unless File.exist?(@from)
 
     logger.info "Adding system link from #{@from} to #{@to}"
     FileUtils.mkdir_p(File.dirname(@to))

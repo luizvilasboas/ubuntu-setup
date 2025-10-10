@@ -7,56 +7,46 @@ require_relative '../lib/app_remover'
 require_relative '../lib/config_installer'
 require_relative '../lib/utils'
 
+require 'json'
+
 # Main class for the script
 class Main
   include Logging
 
-  def initialize(base_config_list_path = 'config/apps', base_config_path = 'config')
-    @base_config_list_path = File.expand_path base_config_list_path
-    @base_config_path = File.expand_path base_config_path
+  def initialize(apps_json = 'apps.json', configs_json = 'configs.json')
+    @apps_json = read_json(apps_json)
+    @configs_json = read_json(configs_json)
+  rescue StandardError => e
+    logger.error "couldn't parse #{apps_json} or #{configs_json}: #{e}"
+    exit 1
   end
 
   def install_config
     logger.info 'Installing configs...'
-
-    configs = {
-      "#{@base_config_path}/starship/starship.toml" => "#{Dir.home}/.config/starship.toml"
-    }
-
-    configs.each do |from, to|
-      config_installer = ConfigInstaller.new(from, to)
-      config_installer.add_symlink
+    @configs_json[:configs].each do |config|
+      ConfigInstaller.new(config[:from], config[:to]).add_symlink
     end
   end
 
   def install_apps
     logger.info 'Installing applications...'
-    logger.info @base_config_list_path
-    read_list("#{@base_config_list_path}/install/native.list").each { |app| install_app(app, :pacman) }
-    read_list("#{@base_config_list_path}/install/aur.list").each { |app| install_app(app, :yay) }
-    read_list("#{@base_config_list_path}/install/flatpak.list").each { |app| install_app(app, :flatpak) }
+    @apps_json[:apps_to_install].each do |app|
+      AppInstaller.new(app[:name], app[:package_name], app[:package_manager]).exec
+    end
   end
 
   def remove_apps
     logger.info 'Removing applications...'
-    read_list("#{@base_config_list_path}/remove/native.list").each { |app| remove_app(app, :pacman) }
-    read_list("#{@base_config_list_path}/remove/aur.list").each { |app| remove_app(app, :yay) }
+    @apps_json[:apps_to_remove].each do |app|
+      AppRemover.new(app[:name], app[:package_name], app[:package_manager]).exec
+    end
   end
 
-  def install_app(app_name, manager)
-    AppInstaller.new(app_name, app_name, manager).install
-  end
+  private
 
-  def remove_app(app_name, manager)
-    AppRemover.new(app_name, app_name, manager).remove
-  end
-
-  def read_list(file_path)
-    File.exist?(file_path) ? File.readlines(file_path).map(&:chomp).reject(&:empty?) : []
-  end
-
-  def read_folder(folder_path)
-    File.exist?(folder_path) and File.directory?(folder_path) ? Dir.children(folder_path) : nil
+  def read_json(json_path)
+    json_string = File.read json_path
+    JSON.parse json_string, symbolize_names: true
   end
 end
 
