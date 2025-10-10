@@ -25,7 +25,7 @@ class Main
     logger.info 'Installing configs...'
     @configs_json[:configs].each do |config|
       to = config[:to]
-      match_data = to.match(/^~\//)
+      match_data = to.match(%r{^~/})
       to = "#{Dir.home}/#{match_data.post_match}" if match_data
 
       from = File.expand_path(config[:from])
