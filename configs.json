@@ -9,6 +9,11 @@
       "name": "Starship",
       "from": "./config/starship/starship.toml",
       "to": "~/.config/starship.toml"
+    },
+    {
+      "name": "Waybar",
+      "from": "./config/waybar",
+      "to": "~/.config/waybar"
     }
   ]
 }

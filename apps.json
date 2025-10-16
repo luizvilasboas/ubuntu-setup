@@ -39,6 +39,11 @@
       "name": "ProtonPlus",
       "package_name": "protonplus",
       "package_manager": "yay"
+    },
+    {
+      "name": "Waybar Updates",
+      "package_name": "waybar-updates",
+      "package_manager": "yay"
     }
   ],
   "apps_to_remove": [
