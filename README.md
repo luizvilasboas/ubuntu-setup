@@ -18,7 +18,7 @@ The main technologies and libraries used in this project are:
 To install and run this project, you can use the following command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/luizvilasboas/omarchy_post_install/main/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/luizvilasboas/omarchy_post_install/refs/heads/main/install.sh | sudo bash
 ```
 
 ## Managed Software
