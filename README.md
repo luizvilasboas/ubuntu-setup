@@ -1,16 +1,14 @@
-# omarchy_post_install
+# ubuntu-setup
 
-> A simple script to remove, install, and configure applications for a base Omarchy installation.
+> A simple script to remove, install, and configure applications for a base Ubuntu installation.
 
 ## About the Project
-
-This project is a set of scripts to automate the installation and configuration of various applications on an Arch Linux-based distribution, specifically Omarchy. It provides a simple way to set up a new machine with all the necessary software, without having to manually install and configure each application one by one.
+This project is a set of scripts to automate the installation and configuration of various applications on Ubuntu Desktop. It provides a simple way to set up a new machine with all the necessary software, without having to manually install and configure each application one by one.
 
 ## Tech Stack
 
 The main technologies and libraries used in this project are:
 
-* **Ruby**
 * **Bash**
 
 ## Installation
@@ -18,41 +16,10 @@ The main technologies and libraries used in this project are:
 To install and run this project, you can use the following command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/luizvilasboas/omarchy_post_install/refs/heads/main/install.sh | sudo bash
+git clone https://github.com/luizvilasboas/ubuntu-setup.git
+cd ubuntu-setup
+./setup.sh
 ```
-
-## Managed Software
-
-This script will install the following applications:
-
-* KeePassXC
-* Discord
-* Gnome Disk Utility
-* GParted
-* Cheese
-* Steam
-* Lutris
-* ProtonPlus
-* Waybar Updates
-
-This script will remove the following applications:
-
-* 1Password
-* Typora
-* Dropbox
-* Obsidian
-* Signal Desktop
-* OBS Studio
-* Kdenlive
-* Tailscale
-
-## Managed Configurations
-
-This script will install the following configurations:
-
-* Bash
-* Starship
-* Waybar
 
 ## Contributing
 
@@ -71,4 +38,3 @@ Don't forget to give the project a star! Thanks again!
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
-
