@@ -1,25 +1,42 @@
 # ubuntu-setup
 
-> A simple script to remove, install, and configure applications for a base Ubuntu installation.
+> A simple script to automate the removal, installation, and configuration of applications for a base Ubuntu installation.
 
 ## About the Project
-This project is a set of scripts to automate the installation and configuration of various applications on Ubuntu Desktop. It provides a simple way to set up a new machine with all the necessary software, without having to manually install and configure each application one by one.
+
+This project provides a set of shell scripts to automate the setup of a new Ubuntu Desktop machine. It is designed to streamline the process of installing and configuring essential software, saving you from having to manually set up each application one by one.
 
 ## Tech Stack
 
-The main technologies and libraries used in this project are:
+*   [Bash](https://www.gnu.org/software/bash/)
 
-* **Bash**
+## Usage
 
-## Installation
+Below are the instructions for you to use these setup scripts.
 
-To install and run this project, you can use the following command:
+### Prerequisites
 
-```bash
-git clone https://github.com/luizvilasboas/ubuntu-setup.git
-cd ubuntu-setup
-./setup.sh
-```
+This script is designed for a fresh **Ubuntu Desktop** installation.
+
+### Installation and Execution
+
+Follow the steps below:
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/luizvilasboas/ubuntu-setup.git
+    ```
+
+2.  **Navigate to the project directory**
+    ```bash
+    cd ubuntu-setup
+    ```
+
+3.  **Run the setup script**
+    > **Warning:** Review the `setup.sh` script before running to ensure you agree with the changes it will make to your system.
+    ```bash
+    ./setup.sh
+    ```
 
 ## Contributing
 
@@ -29,11 +46,11 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 Don't forget to give the project a star! Thanks again!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
 ## License
 
