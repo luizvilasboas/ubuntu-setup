@@ -1,0 +1,7 @@
+--target=/home/luiz
+--ignore=.stowrc
+--ignore=.git
+--ignore=scripts
+--ignore=README.md
+--ignore=setup.sh
+--verbose=1
