@@ -12,6 +12,8 @@ This project provides a set of shell scripts to automate the setup of a new Ubun
 
 ## Usage
 
+> **Warning:** Update `--target` value to your home folder path in order to work.
+
 Below are the instructions for you to use these setup scripts.
 
 ### Prerequisites
